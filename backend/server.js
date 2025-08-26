@@ -42,7 +42,7 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-export default app;
+
 
 // Create a new group
 app.post("/groups", async (req, res) => {
@@ -309,3 +309,4 @@ app.post("/groups/:groupId/leave", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+export default app;
