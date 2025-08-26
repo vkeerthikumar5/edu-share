@@ -130,19 +130,10 @@ app.get('/group_info/:group_id',async(req,res)=>{
   
 
 // Serve uploaded files
-app.use("/uploads", express.static("uploads"));
 
-// Multer storage setup
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const dir = "uploads/";
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir);
-    cb(null, dir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
+
+// Multer memory storage for Vercel
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 /* ---------------- RESOURCE ROUTES ---------------- */
@@ -166,9 +157,11 @@ app.post("/groups/:groupId/resources", upload.single("file"), async (req, res) =
 
     const resource = {
       title: req.body.title,
-      fileUrl: `/uploads/${req.file.filename}`,
+      fileName: req.file.originalname,
+      fileBuffer: req.file.buffer, // stores file content in memory
       uploadedAt: new Date(),
     };
+    
 
     group.resources.push(resource);
     await group.save();
