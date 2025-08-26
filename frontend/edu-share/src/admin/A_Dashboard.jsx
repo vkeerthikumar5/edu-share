@@ -34,7 +34,7 @@ export default function A_Dashboard() {
             Welcome {name}
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Welcome to your dashboard. Here you can manage your profile,
+            Welcome to your dashboard. Here you can manage your profile and,
             view your groups, and upload important resources.
           </p>
 
