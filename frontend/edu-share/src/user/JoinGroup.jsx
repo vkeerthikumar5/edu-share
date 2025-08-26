@@ -11,7 +11,7 @@ export default function JoinGroup() {
         console.log(code);
     
         try {
-            const res = await axios.post(`http://localhost:5000/join_group`, { userId, code });
+            const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/join_group`, { userId, code });
             console.log(res);
             alert(res.data.message);   // success message
         } catch (err) {

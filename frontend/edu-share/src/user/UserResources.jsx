@@ -13,7 +13,7 @@ export default function UserResources() {
   // fetch resources
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/groups/${groupId}/resources`)
+      .get(`${import.meta.env.VITE_API_BASE_URL}/groups/${groupId}/resources`)
       .then((res) => {
         setResources(Array.isArray(res.data) ? res.data : res.data.resources || []);
       })
@@ -38,7 +38,7 @@ export default function UserResources() {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/groups/${groupId}/resources`,
+        `${import.meta.env.VITE_API_BASE_URL}/groups/${groupId}/resources`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -57,7 +57,7 @@ export default function UserResources() {
   const handleDelete = async (resourceId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/groups/${groupId}/resources/${resourceId}`
+        `${import.meta.env.VITE_API_BASE_URL}/groups/${groupId}/resources/${resourceId}`
       );
       setResources(Array.isArray(res.data) ? res.data : res.data.resources || []);
     } catch (err) {
@@ -83,7 +83,7 @@ export default function UserResources() {
             className="flex items-center justify-between border p-3 mb-2 rounded-lg"
           >
            <a 
-  href={`http://localhost:5000${res.fileUrl}`} 
+  href={`${import.meta.env.VITE_API_BASE_URL}${res.fileUrl}`} 
   target="_blank" 
   rel="noopener noreferrer"
   className="text-gray-500 hover:text-gray-600 underline"

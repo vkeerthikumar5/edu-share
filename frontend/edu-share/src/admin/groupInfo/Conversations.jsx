@@ -20,7 +20,7 @@ export default function Conversations() {
   const fetchMessages = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/${groupId}/messages`,
+        `${import.meta.env.VITE_API_BASE_URL}/${groupId}/messages`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       
@@ -35,7 +35,7 @@ export default function Conversations() {
     if (!newMessage.trim()) return;
     try {
       await axios.post(
-        `http://localhost:5000/${groupId}/messages`,
+        `${import.meta.env.VITE_API_BASE_URL}/${groupId}/messages`,
         { text: newMessage,userId },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -14,7 +14,7 @@ export default function AddGroups() {
         
         try{
             const data={name:title,description:desc,adminId}
-            const res=await axios.post('http://localhost:5000/groups',data)
+            const res=await axios.post('${import.meta.env.VITE_API_BASE_URL}/groups',data)
             alert(res.data.message)
             
         }

@@ -8,7 +8,7 @@ export default function UserAboutGroup() {
   useEffect(() => {
     const fetchGroup = async () => {
         try {
-            let res = await axios.get(`http://localhost:5000/group_info/${group_id}`);
+            let res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/group_info/${group_id}`);
             setGroup(res.data.info);
             console.log(res);
         } catch(err) {

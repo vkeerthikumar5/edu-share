@@ -16,7 +16,7 @@ export default function UserGroups() {
   const fetchGroups = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/get_user_groups/${userId}`
+        `${import.meta.env.VITE_API_BASE_URL}/get_user_groups/${userId}`
       );
       setGroups(res.data.groups);
     } catch (err) {
@@ -27,7 +27,7 @@ export default function UserGroups() {
   // leave group
   const leaveGroup = async (groupId) => {
     try {
-      await axios.post(`http://localhost:5000/groups/${groupId}/leave`, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/groups/${groupId}/leave`, {
         userId,
       });
       // refresh groups after leaving

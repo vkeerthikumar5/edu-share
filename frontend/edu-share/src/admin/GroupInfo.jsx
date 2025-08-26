@@ -11,7 +11,7 @@ export default function GroupInfo() {
     useEffect(() =>{
         const fetchInfo = async () => {
             try {
-                let res = await axios.get(`http://localhost:5000/group_info/${group_id}`);
+                let res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/group_info/${group_id}`);
                 setName(res.data.info.name);
                 console.log(res);
             } catch(err) {

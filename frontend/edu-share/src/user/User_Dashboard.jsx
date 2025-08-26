@@ -11,7 +11,7 @@ export default function User_Dashboard() {
     useEffect(() => {
       const fetchEvents=async()=>{
         try{
-        const res=await axios.get(`http://localhost:5000/users/${userId}`)
+        const res=await axios.get(`${import.meta.env.VITE_API_BASE_URL}/users/${userId}`)
         console.log(res)
         setcount(res.data.totalGroups)
       }

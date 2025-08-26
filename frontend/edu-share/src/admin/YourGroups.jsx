@@ -12,7 +12,7 @@ export default function YourGroups() {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/get_groups/${adminId}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/get_groups/${adminId}`);
         console.log(res.data.groups);  // <-- check your backend response
         setGroups(res.data.groups);   // <-- fix here
       } catch (err) {
