@@ -9,6 +9,8 @@ import Message from "./models/Message.js";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
+
+import { fileURLToPath } from "url";
 import { authMiddleware } from "./middleware/authen.js";
 dotenv.config();
 
@@ -16,7 +18,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: "http://localhost:5173",  // your frontend origin
+    origin: "https://edu-share-zumr.vercel.app/",  // your frontend origin
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
@@ -29,17 +31,18 @@ app.get("/", (req, res) => {
     res.send("Backend is running...");
 });
 
-const PORT = process.env.PORT || 5000;
-mongoose
-    .connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(() => {
-        app.listen(PORT, () => console.log("Server is running on port " + PORT));
-    })
-    .catch((err) => console.log(err));
 
+mongoose
+  .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+  })
+  .then(() => {
+      console.log("MongoDB connected");
+  })
+  .catch((err) => console.log(err));
+
+export default app;
 
 // Create a new group
 app.post("/groups", async (req, res) => {
@@ -212,6 +215,9 @@ app.delete("/groups/:groupId/resources/:resourceId", async (req, res) => {
 
 
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.get("/uploads/:filename", (req, res) => {
   const filePath = path.join(__dirname, "uploads", req.params.filename);
 
@@ -220,10 +226,13 @@ app.get("/uploads/:filename", (req, res) => {
 
   if (ext === ".pdf") {
     res.setHeader("Content-Type", "application/pdf");
-    res.sendFile(filePath);
-  } else {
-    res.sendFile(filePath);
   }
+
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      res.status(404).send("File not found!");
+    }
+  });
 });
 
 
