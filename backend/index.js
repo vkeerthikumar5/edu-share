@@ -309,4 +309,4 @@ app.post("/groups/:groupId/leave", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-export default app;
+export default (req, res) => app(req, res);
