@@ -14,7 +14,7 @@ import AddGroups from './admin/AddGroups';
 import YourGroups from './admin/YourGroups';
 import JoinGroup from './user/JoinGroup';
 import UserGroups from './user/UserGroups';
-import GroupInfo from './admin/groupInfo';
+import GroupInfo from './admin/GroupInfo';
 import Conversations from './admin/groupInfo/Conversations';
 import Resources from './admin/groupInfo/Resources';
 import AboutGroup from './admin/groupInfo/AboutGroup';
