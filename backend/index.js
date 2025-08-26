@@ -215,24 +215,22 @@ app.delete("/groups/:groupId/resources/:resourceId", async (req, res) => {
 
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
+
 
 app.get("/uploads/:filename", (req, res) => {
-  const filePath = path.join(__dirname, "uploads", req.params.filename);
+  const filePath = path.join(process.cwd(), "uploads", req.params.filename);
 
-  // detect file type
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).send("File not found!");
+  }
+
   const ext = path.extname(filePath).toLowerCase();
-
   if (ext === ".pdf") {
     res.setHeader("Content-Type", "application/pdf");
   }
 
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      res.status(404).send("File not found!");
-    }
-  });
+  res.sendFile(filePath);
 });
 
 
