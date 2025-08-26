@@ -18,7 +18,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-    origin: "https://edu-share-zumr.vercel.app/",  // your frontend origin
+    origin: "https://edu-share-zumr.vercel.app",  // your frontend origin
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
